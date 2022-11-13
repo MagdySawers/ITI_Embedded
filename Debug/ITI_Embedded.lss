@@ -1,0 +1,389 @@
+
+ITI_Embedded.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000001e0  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  00000254  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000007  00800060  00800060  00000254  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  00000254  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000284  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 000000b0  00000000  00000000  000002c0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00000a06  00000000  00000000  00000370  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 0000075e  00000000  00000000  00000d76  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00000596  00000000  00000000  000014d4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000138  00000000  00000000  00001a6c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    0000051c  00000000  00000000  00001ba4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    000003de  00000000  00000000  000020c0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000070  00000000  00000000  0000249e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+   8:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+   c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  10:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  14:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  18:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  1c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  20:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  24:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  28:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  2c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  30:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  34:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  38:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  3c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  40:	0c 94 93 00 	jmp	0x126	; 0x126 <__vector_16>
+  44:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  48:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  4c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  50:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_clear_bss>:
+  60:	20 e0       	ldi	r18, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	01 c0       	rjmp	.+2      	; 0x6a <.do_clear_bss_start>
+
+00000068 <.do_clear_bss_loop>:
+  68:	1d 92       	st	X+, r1
+
+0000006a <.do_clear_bss_start>:
+  6a:	a7 36       	cpi	r26, 0x67	; 103
+  6c:	b2 07       	cpc	r27, r18
+  6e:	e1 f7       	brne	.-8      	; 0x68 <.do_clear_bss_loop>
+  70:	0e 94 44 00 	call	0x88	; 0x88 <main>
+  74:	0c 94 ee 00 	jmp	0x1dc	; 0x1dc <_exit>
+
+00000078 <__bad_interrupt>:
+  78:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000007c <ADC_NotFunc>:
+}
+
+void ADC_NotFunc (void)
+{
+	
+	DIO_SetPortValue(DIO_u8PORTC,APP_u16ADCReading);
+  7c:	60 91 65 00 	lds	r22, 0x0065	; 0x800065 <APP_u16ADCReading>
+  80:	82 e0       	ldi	r24, 0x02	; 2
+  82:	0e 94 d3 00 	call	0x1a6	; 0x1a6 <DIO_SetPortValue>
+  86:	08 95       	ret
+
+00000088 <main>:
+
+
+int main(void)
+{  
+	 
+	PORT_voidInit();
+  88:	0e 94 e3 00 	call	0x1c6	; 0x1c6 <PORT_voidInit>
+	ADC_voidInit();
+  8c:	0e 94 51 00 	call	0xa2	; 0xa2 <ADC_voidInit>
+    sei();
+  90:	78 94       	sei
+    while (1) 
+    {
+		
+		ADC_u8GetChannelReading_A_Synch(1,&APP_u16ADCReading,&ADC_NotFunc);
+  92:	4e e3       	ldi	r20, 0x3E	; 62
+  94:	50 e0       	ldi	r21, 0x00	; 0
+  96:	65 e6       	ldi	r22, 0x65	; 101
+  98:	70 e0       	ldi	r23, 0x00	; 0
+  9a:	81 e0       	ldi	r24, 0x01	; 1
+  9c:	0e 94 6a 00 	call	0xd4	; 0xd4 <ADC_u8GetChannelReading_A_Synch>
+  a0:	f8 cf       	rjmp	.-16     	; 0x92 <main+0xa>
+
+000000a2 <ADC_voidInit>:
+	Schy_state=Busy_Func;
+	
+}
+	return Schy_state;
+	
+}
+  a2:	87 b1       	in	r24, 0x07	; 7
+  a4:	8f 7b       	andi	r24, 0xBF	; 191
+  a6:	87 b9       	out	0x07, r24	; 7
+  a8:	87 b1       	in	r24, 0x07	; 7
+  aa:	8f 77       	andi	r24, 0x7F	; 127
+  ac:	87 b9       	out	0x07, r24	; 7
+  ae:	87 b1       	in	r24, 0x07	; 7
+  b0:	8f 7d       	andi	r24, 0xDF	; 223
+  b2:	87 b9       	out	0x07, r24	; 7
+  b4:	86 b1       	in	r24, 0x06	; 6
+  b6:	81 60       	ori	r24, 0x01	; 1
+  b8:	86 b9       	out	0x06, r24	; 6
+  ba:	86 b1       	in	r24, 0x06	; 6
+  bc:	82 60       	ori	r24, 0x02	; 2
+  be:	86 b9       	out	0x06, r24	; 6
+  c0:	86 b1       	in	r24, 0x06	; 6
+  c2:	84 60       	ori	r24, 0x04	; 4
+  c4:	86 b9       	out	0x06, r24	; 6
+  c6:	86 b1       	in	r24, 0x06	; 6
+  c8:	80 68       	ori	r24, 0x80	; 128
+  ca:	86 b9       	out	0x06, r24	; 6
+  cc:	86 b1       	in	r24, 0x06	; 6
+  ce:	87 7f       	andi	r24, 0xF7	; 247
+  d0:	86 b9       	out	0x06, r24	; 6
+  d2:	08 95       	ret
+
+000000d4 <ADC_u8GetChannelReading_A_Synch>:
+
+ADC_Error_State ADC_u8GetChannelReading_A_Synch(u8 Copy_u8Channel , u16 * Copy_u16Reading , void (* Copy_pvNotificationFunc)(void) )
+{
+	ADC_Error_State Aschy_state=OK;
+	
+if(ADC_eState==Idel)
+  d4:	90 91 60 00 	lds	r25, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+  d8:	91 11       	cpse	r25, r1
+  da:	1f c0       	rjmp	.+62     	; 0x11a <ADC_u8GetChannelReading_A_Synch+0x46>
+{
+		
+	
+	if(Copy_u16Reading==NULL  ||  Copy_pvNotificationFunc==NULL)
+  dc:	61 15       	cp	r22, r1
+  de:	71 05       	cpc	r23, r1
+  e0:	f1 f0       	breq	.+60     	; 0x11e <ADC_u8GetChannelReading_A_Synch+0x4a>
+  e2:	41 15       	cp	r20, r1
+  e4:	51 05       	cpc	r21, r1
+  e6:	e9 f0       	breq	.+58     	; 0x122 <ADC_u8GetChannelReading_A_Synch+0x4e>
+	{
+		Aschy_state=NULL_Pointer;
+	}
+	else
+	{
+		ADC_eState=Running;
+  e8:	91 e0       	ldi	r25, 0x01	; 1
+  ea:	90 93 60 00 	sts	0x0060, r25	; 0x800060 <__DATA_REGION_ORIGIN__>
+		
+		ADC_pu16Reading = Copy_u16Reading;
+  ee:	70 93 64 00 	sts	0x0064, r23	; 0x800064 <ADC_pu16Reading+0x1>
+  f2:	60 93 63 00 	sts	0x0063, r22	; 0x800063 <ADC_pu16Reading>
+		
+		ADC_pvCallBackNotificationFunc = Copy_pvNotificationFunc;
+  f6:	50 93 62 00 	sts	0x0062, r21	; 0x800062 <ADC_pvCallBackNotificationFunc+0x1>
+  fa:	40 93 61 00 	sts	0x0061, r20	; 0x800061 <ADC_pvCallBackNotificationFunc>
+		
+		
+		
+		/*ADjust the Channel*/
+		ADMUX&=0xE0;
+  fe:	97 b1       	in	r25, 0x07	; 7
+ 100:	90 7e       	andi	r25, 0xE0	; 224
+ 102:	97 b9       	out	0x07, r25	; 7
+		ADMUX|=Copy_u8Channel;
+ 104:	97 b1       	in	r25, 0x07	; 7
+ 106:	89 2b       	or	r24, r25
+ 108:	87 b9       	out	0x07, r24	; 7
+		
+		/* Start Conversion */
+		SET_BIT(ADCSRA,ADCSRA_ADSC);
+ 10a:	86 b1       	in	r24, 0x06	; 6
+ 10c:	80 64       	ori	r24, 0x40	; 64
+ 10e:	86 b9       	out	0x06, r24	; 6
+		
+		/* Enable Interrupt of ADC */
+		SET_BIT(ADCSRA,ADCSRA_ADIE);
+ 110:	86 b1       	in	r24, 0x06	; 6
+ 112:	88 60       	ori	r24, 0x08	; 8
+ 114:	86 b9       	out	0x06, r24	; 6
+/*=======================================================================*/
+
+
+ADC_Error_State ADC_u8GetChannelReading_A_Synch(u8 Copy_u8Channel , u16 * Copy_u16Reading , void (* Copy_pvNotificationFunc)(void) )
+{
+	ADC_Error_State Aschy_state=OK;
+ 116:	81 e0       	ldi	r24, 0x01	; 1
+ 118:	08 95       	ret
+	}
+}
+
+else
+{
+Aschy_state=Busy_Func;	
+ 11a:	83 e0       	ldi	r24, 0x03	; 3
+ 11c:	08 95       	ret
+{
+		
+	
+	if(Copy_u16Reading==NULL  ||  Copy_pvNotificationFunc==NULL)
+	{
+		Aschy_state=NULL_Pointer;
+ 11e:	82 e0       	ldi	r24, 0x02	; 2
+ 120:	08 95       	ret
+ 122:	82 e0       	ldi	r24, 0x02	; 2
+}
+	
+	
+	
+	return Aschy_state;
+}
+ 124:	08 95       	ret
+
+00000126 <__vector_16>:
+
+
+
+void __vector_16 (void) __attribute__((signal));
+void __vector_16 (void)
+{
+ 126:	1f 92       	push	r1
+ 128:	0f 92       	push	r0
+ 12a:	0f b6       	in	r0, 0x3f	; 63
+ 12c:	0f 92       	push	r0
+ 12e:	11 24       	eor	r1, r1
+ 130:	2f 93       	push	r18
+ 132:	3f 93       	push	r19
+ 134:	4f 93       	push	r20
+ 136:	5f 93       	push	r21
+ 138:	6f 93       	push	r22
+ 13a:	7f 93       	push	r23
+ 13c:	8f 93       	push	r24
+ 13e:	9f 93       	push	r25
+ 140:	af 93       	push	r26
+ 142:	bf 93       	push	r27
+ 144:	ef 93       	push	r30
+ 146:	ff 93       	push	r31
+	
+	/*Reading of ADC*/
+	*ADC_pu16Reading=ADCL || (u16)ADCH<<8 ;
+ 148:	e0 91 63 00 	lds	r30, 0x0063	; 0x800063 <ADC_pu16Reading>
+ 14c:	f0 91 64 00 	lds	r31, 0x0064	; 0x800064 <ADC_pu16Reading+0x1>
+ 150:	84 b1       	in	r24, 0x04	; 4
+ 152:	81 11       	cpse	r24, r1
+ 154:	06 c0       	rjmp	.+12     	; 0x162 <__vector_16+0x3c>
+ 156:	85 b1       	in	r24, 0x05	; 5
+ 158:	88 23       	and	r24, r24
+ 15a:	31 f0       	breq	.+12     	; 0x168 <__vector_16+0x42>
+ 15c:	81 e0       	ldi	r24, 0x01	; 1
+ 15e:	90 e0       	ldi	r25, 0x00	; 0
+ 160:	05 c0       	rjmp	.+10     	; 0x16c <__vector_16+0x46>
+ 162:	81 e0       	ldi	r24, 0x01	; 1
+ 164:	90 e0       	ldi	r25, 0x00	; 0
+ 166:	02 c0       	rjmp	.+4      	; 0x16c <__vector_16+0x46>
+ 168:	80 e0       	ldi	r24, 0x00	; 0
+ 16a:	90 e0       	ldi	r25, 0x00	; 0
+ 16c:	91 83       	std	Z+1, r25	; 0x01
+ 16e:	80 83       	st	Z, r24
+	
+	
+	/*ADC_state is Idel because ADC finshed conversion*/
+	ADC_eState=Idel;
+ 170:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <__DATA_REGION_ORIGIN__>
+	
+	/*Invoke the CAll back Func*/
+	ADC_pvCallBackNotificationFunc();  //do any thing in this Func After the adc conversion finished 
+ 174:	e0 91 61 00 	lds	r30, 0x0061	; 0x800061 <ADC_pvCallBackNotificationFunc>
+ 178:	f0 91 62 00 	lds	r31, 0x0062	; 0x800062 <ADC_pvCallBackNotificationFunc+0x1>
+ 17c:	09 95       	icall
+	
+	/*Disable ADC conversion complete*/
+	CLR_BIT(ADCSRA,ADCSRA_ADIE);
+ 17e:	86 b1       	in	r24, 0x06	; 6
+ 180:	87 7f       	andi	r24, 0xF7	; 247
+ 182:	86 b9       	out	0x06, r24	; 6
+	
+}
+ 184:	ff 91       	pop	r31
+ 186:	ef 91       	pop	r30
+ 188:	bf 91       	pop	r27
+ 18a:	af 91       	pop	r26
+ 18c:	9f 91       	pop	r25
+ 18e:	8f 91       	pop	r24
+ 190:	7f 91       	pop	r23
+ 192:	6f 91       	pop	r22
+ 194:	5f 91       	pop	r21
+ 196:	4f 91       	pop	r20
+ 198:	3f 91       	pop	r19
+ 19a:	2f 91       	pop	r18
+ 19c:	0f 90       	pop	r0
+ 19e:	0f be       	out	0x3f, r0	; 63
+ 1a0:	0f 90       	pop	r0
+ 1a2:	1f 90       	pop	r1
+ 1a4:	18 95       	reti
+
+000001a6 <DIO_SetPortValue>:
+
+/* IO Ports */
+void DIO_SetPortValue (u8 u8PortId, u8 u8PortVal)
+{
+	/* Check on the Required PORT Number */
+	switch (u8PortId)
+ 1a6:	81 30       	cpi	r24, 0x01	; 1
+ 1a8:	41 f0       	breq	.+16     	; 0x1ba <DIO_SetPortValue+0x14>
+ 1aa:	28 f0       	brcs	.+10     	; 0x1b6 <DIO_SetPortValue+0x10>
+ 1ac:	82 30       	cpi	r24, 0x02	; 2
+ 1ae:	39 f0       	breq	.+14     	; 0x1be <DIO_SetPortValue+0x18>
+ 1b0:	83 30       	cpi	r24, 0x03	; 3
+ 1b2:	39 f0       	breq	.+14     	; 0x1c2 <DIO_SetPortValue+0x1c>
+ 1b4:	08 95       	ret
+	{
+	case     DIO_u8PORTA: PORTA_Register = u8PortVal; break;
+ 1b6:	6b bb       	out	0x1b, r22	; 27
+ 1b8:	08 95       	ret
+	case     DIO_u8PORTB: PORTB_Register = u8PortVal; break;
+ 1ba:	68 bb       	out	0x18, r22	; 24
+ 1bc:	08 95       	ret
+	case     DIO_u8PORTC: PORTC_Register = u8PortVal; break;
+ 1be:	65 bb       	out	0x15, r22	; 21
+ 1c0:	08 95       	ret
+	case     DIO_u8PORTD: PORTD_Register = u8PortVal; break;
+ 1c2:	62 bb       	out	0x12, r22	; 18
+ 1c4:	08 95       	ret
+
+000001c6 <PORT_voidInit>:
+#include "PORT_interface.h"
+#include "PORT_register.h"
+
+void PORT_voidInit(void){
+	
+	DDRA_Register = PORTA_DIR;
+ 1c6:	1a ba       	out	0x1a, r1	; 26
+	DDRB_Register = PORTB_DIR;
+ 1c8:	81 e0       	ldi	r24, 0x01	; 1
+ 1ca:	87 bb       	out	0x17, r24	; 23
+	DDRC_Register = PORTC_DIR;
+ 1cc:	8f ef       	ldi	r24, 0xFF	; 255
+ 1ce:	84 bb       	out	0x14, r24	; 20
+	DDRD_Register = PORTD_DIR;
+ 1d0:	11 ba       	out	0x11, r1	; 17
+	
+	PORTA_Register = PORTA_INITIAL_VAL;
+ 1d2:	1b ba       	out	0x1b, r1	; 27
+	PORTB_Register = PORTB_INITIAL_VAL;
+ 1d4:	18 ba       	out	0x18, r1	; 24
+	PORTC_Register = PORTC_INITIAL_VAL;
+ 1d6:	15 ba       	out	0x15, r1	; 21
+	PORTD_Register = PORTD_INITIAL_VAL;
+ 1d8:	12 ba       	out	0x12, r1	; 18
+ 1da:	08 95       	ret
+
+000001dc <_exit>:
+ 1dc:	f8 94       	cli
+
+000001de <__stop_program>:
+ 1de:	ff cf       	rjmp	.-2      	; 0x1de <__stop_program>
